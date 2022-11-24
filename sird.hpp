@@ -19,12 +19,6 @@ struct State
   int V;
 };
 enum class Person { Empty, Susceptible, Infected, Recovered, Dead, Vaccinated };
-struct Desease
-{
-  int infectivity;
-  double beta;
-  double gamma;
-};
 
 struct Position
 {
