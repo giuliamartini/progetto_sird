@@ -95,8 +95,8 @@ int main()
 
   // definizione grafico
   std::ofstream graph;
-  graph << "Graph\n";
-  graph.open("Graph.csv");
+  graph << "graph\n";
+  graph.open("graph.csv");
   graph << "Day,Susceptible,Infected,Recovered,Dead,Vaccinated\n";
 
   // int infects = board.Sird::Population::count(infectivity).I;
