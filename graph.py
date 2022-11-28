@@ -12,25 +12,34 @@ D = df['Dead']
 V = df['Vaccinated']
 
 
-#plt.figure(figsize=(9, 3))
 
-# plt.subplot(131)
-#plt.scatter( S)
-# plt.subplot(132)
-#plt.scatter( I)
-# plt.subplot(133)
-#plt.plot( R)
-#plt.plot( D)
-# plt.suptitle('Sird')
-# plt.show()
 
-# plot
-#plt.plot(S, c='g')
-plt.scatter(Day, I, s=5, c='b', marker='o')
+fig, axs = plt.subplots(2, 2)
+axs[0, 0].scatter(Day, I, s=5, c='r', marker='o'),  # infected
+axs[0, 0].set_title('Infected')
+axs[0, 0].set(xlabel='Day', ylabel='Infected')
+axs[0, 0].label_outer()
+# susceptibles e recovered
+axs[0, 1].plot(Day, S, 'tab:blue', Day, R, 'tab:orange')
+axs[0, 1].set_title('Susceptibles (b) and Recovered (o)')
+axs[0, 1].set(
+    xlabel='Day', ylabel='Susceptibles  and Recovered ')
+#axs[0, 1].label_outer()
+axs[1, 0].plot(Day, V, 'tab:green')  # Vaccinated
+axs[1, 0].set_title('Vaccinated')
+axs[1, 0].set(xlabel='Day', ylabel='Vaccinated')
+axs[1, 0].label_outer()
+axs[1, 1].scatter(Day, D, s=5, c='b', marker='o')
+axs[1, 1].set_title('Deads')
+axs[1, 1].set(xlabel='Day', ylabel='Deads')
+axs[1, 1].label_outer()
+#axs[1, 2].plot(Day, S, 'tab:blue',Day,I,'tab:red', Day, R, 'tab:orange', Day,D,'tab:green')  # Vaccinated
+#axs[1, 2].set_title('S,I,R,D')
+#axs[1, 2].set(xlabel='Day', ylabel='S (blue), I (red),R (orange), D (green)')
+#axs[1, 2].label_outer()
 
-#plt.plot(R, c='y')
-# plt.plot(D)
-#plt.plot(V, c='r')
-plt.xlabel('Days')
-plt.ylabel('Infected')
+
+for ax in fig.get_axes():
+    ax.label_outer()
 plt.show()
+    
