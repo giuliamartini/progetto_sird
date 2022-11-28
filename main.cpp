@@ -113,7 +113,7 @@ int main()
     std::cout << "S: "
               << count.S + count.V
               // tra i suscettibili conto anche i vaccinati
-              << " - I: " << count.I << " - R: " << count.R << "D: " << count.D
+              << " - I: " << count.I << " - R: " << count.R << " - D: " << count.D
               << " - V: " << count.V << "\n\n";
 
     std::cout << "Day " << frame << '\n';
