@@ -1,5 +1,4 @@
 
-
 #ifndef SIRD_HPP
 #define SIRD_HPP
 #include <algorithm>
@@ -19,6 +18,12 @@ struct State
   int V;
 };
 enum class Person { Empty, Susceptible, Infected, Recovered, Dead, Vaccinated };
+struct Desease
+{
+  int infectivity;
+  double beta;
+  double gamma;
+};
 
 struct Position
 {
@@ -73,5 +78,3 @@ class Population  // diventa board, che tra person population e natin non si
 }  // namespace Sird
 #endif
 
-// se trovate un modo per snellire codice mandate, soprattutto per la parte in
-// cui si valutano i vicini infetti, è un po' un pugno nell'ochio quel codice
