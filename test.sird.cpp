@@ -61,13 +61,14 @@ SUBCASE("Five infected on the board") {
 /*TEST_CASE("Testing the stability of the population") {
 
     Sird::Population board(20); 
-    board.placePeople(500, 3); //numero massimo di persone 
-    board.setInfected({20, 20}); 
+    board.placePeople(100, 3); //numero massimo di persone 
+    board.setInfected({10, 10}); 
     Sird::State count = board.counts(3); 
     int frame = 0;
     board.Sird::Population::evolve(3, 0.8, 0.3, 0.1);
+    board.move(3);
     ++frame;
-    CHECK(count.S + count.I + count.R + count.D + count.V == 1000);
+    CHECK(count.S + count.I + count.R + count.D + count.V == 100);
 }*/
 
 
