@@ -23,8 +23,8 @@ Sird::Person const& Sird::Population::person(int r, int c) const  // accesso
 Sird::State Sird::Population::counts(int infectivity)
 {
   State count = {0, 0, 0, 0, 0};
-  for (int r = infectivity, end = side() - infectivity; r != end; ++r) {
-    for (int c = infectivity, end = side() * 3 - infectivity; c != end; ++c) {
+  for (int r = 0, end = side() - 1; r != end; ++r) {
+    for (int c = 0, end = side() * 3 - 1; c != end; ++c) {
       if (person(r, c) == Sird::Person::Susceptible) {
         ++count.S;
       } else if (person(r, c) == Sird::Person::Vaccinated) {
@@ -38,6 +38,7 @@ Sird::State Sird::Population::counts(int infectivity)
       }
     }
   }
+
   return count;
 }
 void Sird::Population::setInfected(Position p)
@@ -47,7 +48,8 @@ void Sird::Population::setInfected(Position p)
 
 void Sird::Population::placePeople(int numberOfPeople, int infectivity)
 {
-  assert(numberOfPeople > 2 && numberOfPeople < n_ * 3 * n_);
+  assert(numberOfPeople > 2 &&
+         numberOfPeople < (n_ - infectivity) * 3 * (n_ - infectivity));
 
   std::random_device eng;
   std::vector<Position> emptyCells;
@@ -214,6 +216,7 @@ void Sird::Population::resusceptible(int infectivity,
                                      double beta,
                                      Sird::State& state)
 {
+  int n_ = side();
   int recovereds = static_cast<int>(beta * state.R);
   assert(recovereds < n_ * 3 * n_);
 
@@ -241,7 +244,7 @@ void Sird::Population::evolve(
     double delta,
     double epsilon)
 {
-  int N = n_;
+  int N = side();
   // current.side();
   // Sird::Population next = current;
   for (int r = infectivity; r < N - infectivity; ++r) {
@@ -288,7 +291,8 @@ void Sird::Population::evolve(
                                 // possiamo aggiungere qualcosa sui guariti (
                                 // tipo che dopo un po tornano Susceptible)
       } else if (person(r, c) == Sird::Person::Dead) {
-        person(r, c) = Sird::Person::Empty;
+        continue;
+        // person(r, c) = Sird::Person::Empty;
       }
     }
   }
@@ -298,11 +302,13 @@ void Sird::Population::move(int const infectivity)
 {
   std::random_device eng;
   std::uniform_int_distribution<int> dist(0, 4);  // 5 possibility
-  for (int r = infectivity, end = side() - infectivity; r != end; ++r) {
-    for (int c = infectivity, end = side() * 3 - infectivity; c != end; ++c) {
+  for (int r = infectivity, end = side() + 1 - infectivity; r != end; ++r) {
+    for (int c = infectivity, end = side() * 3 + 1 - infectivity; c != end;
+         ++c) {
       if (person(r, c) == Person::Susceptible ||
           person(r, c) == Person::Infected ||
-          person(r, c) == Person::Recovered) {
+          person(r, c) == Person::Recovered ||
+          person(r, c) == Person::Vaccinated) {
         int direction = dist(eng);
 
         switch (direction) {
