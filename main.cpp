@@ -25,8 +25,7 @@ void print_f(std::ostream& os,
           os << "\033[31m*\033[0m";
           break;
         case Sird::Person::Vaccinated:
-          os << '^';
-          // os << "\033[36m^\033[0m";
+          os << "\033[32m^\033[0m";
           break;
         case Sird::Person::Susceptible:
           os << "\033[36m+\033[0m";
