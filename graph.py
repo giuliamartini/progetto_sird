@@ -33,10 +33,7 @@ axs[1, 1].scatter(Day, D, s=5, c='b', marker='o')
 axs[1, 1].set_title('Deads')
 axs[1, 1].set(xlabel='Day', ylabel='Deads')
 axs[1, 1].label_outer()
-#axs[1, 2].plot(Day, S, 'tab:blue',Day,I,'tab:red', Day, R, 'tab:orange', Day,D,'tab:green')  # Vaccinated
-#axs[1, 2].set_title('S,I,R,D')
-#axs[1, 2].set(xlabel='Day', ylabel='S (blue), I (red),R (orange), D (green)')
-#axs[1, 2].label_outer()
+
 
 
 for ax in fig.get_axes():
