@@ -10,9 +10,6 @@ Sird::Person& Sird::Population::person(int r, int c)  // modificabile
   int N = side();
   assert(r < N && r >= 0 && c < N * 3 && c >= 0);
   return nation[r][c];
-  // auto& row = nation[r];  accesso alla r-esima riga
-  // auto& person = row[c];   accesso alla c-esima colonna
-  // return person;
 }
 Sird::Person const& Sird::Population::person(int r, int c) const  // accesso
 {
@@ -166,8 +163,6 @@ void Sird::Population::massVaccination(
     int toBeVaccinated,
     double epsilon)
 {
-  // int toBeVaccinated
-  // massimo numero di vaccini che riesci a somministrare in un giorno
   assert(toBeVaccinated < n_ * 3 * n_);
 
   std::random_device eng;
@@ -190,28 +185,6 @@ void Sird::Population::massVaccination(
     }
   }
 }
-/*void Sird::Population::vaccinationOver(int infectivity,
-                                       double gamma,
-                                       Sird::State& state)
-{
-  int vaccinated = static_cast<int>(gamma * state.S);
-  assert(vaccinated < n_ * 3 * n_);
-
-  std::random_device eng;
-  std::vector<Position> vaccinatedCells;
-  for (int r = infectivity, end = n_ - infectivity; r != end; ++r) {
-    for (int c = infectivity; c != n_ * 3 - infectivity; ++c) {
-      if (nation[r][c] == Sird::Person::Vaccinated) {
-        vaccinatedCells.push_back({r, c});
-      }
-    }
-  }
-  shuffle(vaccinatedCells.begin(), vaccinatedCells.end(), eng);
-  for (int k = 0; k < vaccinated; ++k) {
-    person(vaccinatedCells[k].r, vaccinatedCells[k].c) =
-        Sird::Person::Susceptible;
-  }
-}*/
 void Sird::Population::resusceptible(int infectivity,
                                      double beta,
                                      Sird::State& state)
@@ -263,10 +236,10 @@ void Sird::Population::evolve(
 
       else if (person(r, c) == Sird::Person::Vaccinated) {
         bool inf =
-            infection(beta * 0.7,
+            infection(beta * epsilon,
                       infectivity,
                       r,
-                      c);  // 0.7 è l'efficacia che aveva il primo vaccino
+                      c);  
         if (inf == true) {
           person(r, c) = Sird::Person::Infected;
         } else if (inf == false) {
@@ -287,12 +260,9 @@ void Sird::Population::evolve(
         }
       } else if (person(r, c) == Sird::Person::Recovered) {
         person(r, c) =
-            Person::Recovered;  // li lascio guariti che non si reinfettano ma
-                                // possiamo aggiungere qualcosa sui guariti (
-                                // tipo che dopo un po tornano Susceptible)
+            Person::Recovered;  
       } else if (person(r, c) == Sird::Person::Dead) {
         continue;
-        // person(r, c) = Sird::Person::Empty;
       }
     }
   }
@@ -301,7 +271,7 @@ void Sird::Population::evolve(
 void Sird::Population::move(int const infectivity)
 {
   std::random_device eng;
-  std::uniform_int_distribution<int> dist(0, 4);  // 5 possibility
+  std::uniform_int_distribution<int> dist(0, 4);  // 5 possibilità
   for (int r = infectivity, end = side() + 1 - infectivity; r != end; ++r) {
     for (int c = infectivity, end = side() * 3 + 1 - infectivity; c != end;
          ++c) {
