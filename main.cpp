@@ -51,25 +51,25 @@ void print_f(std::ostream& os,
 
 int main()
 {
-  std::cout << "Please enter the value of beta" << '\n';
+  std::cout << "Please enter the value of beta, make sure it is between 0.0 and 1.0" << '\n';
   double beta;
   std::cin >> beta;
-  std::cout << '\n' << "Please enter the value of gamma " << '\n';
+  std::cout << '\n' << "Please enter the value of gamma, make sure it is between 0.0 and 1.0" << '\n';
   double gamma;
   std::cin >> gamma;
-  std::cout << '\n' << "Please enter the value of delta " << '\n';
+  std::cout << '\n' << "Please enter the value of delta, make sure it is between 0.0 and 1.0" << '\n';
   double delta;
   std::cin >> delta;
-  std::cout << '\n' << "Please enter the value of epsilon" << '\n';
+  std::cout << '\n' << "Please enter the value of epsilon, make sure it is between 0.0 and 1.0" << '\n';
   double epsilon;
   std::cin >> epsilon;
-  std::cout << '\n' << "Please enter the value of infectivity" << '\n';
+  std::cout << '\n' << "Please enter the value of infectivity (i)" << '\n';
   int infectivity; 
   std::cin >> infectivity;
   std::cout  << '\n' << "Please enter the dimension of the board" << '\n';
   int n_;
   std::cin >> n_;
-  std::cout << '\n' << "Please enter the initial number of susceptibles, less than n*n*3" << '\n';
+  std::cout << '\n' << "Please enter the initial number of susceptibles, make sure it is less than 3 * (n - i) * (n - i)" << '\n';
   int numberOfPeople;
   std::cin >> numberOfPeople;
   
