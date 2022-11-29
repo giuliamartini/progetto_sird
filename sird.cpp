@@ -17,7 +17,7 @@ Sird::Person const& Sird::Population::person(int r, int c) const  // accesso
   return nation[r][c];
   assert(r < N && r >= 0 && c < N * 3 && c >= 0);
 }
-Sird::State Sird::Population::counts(int infectivity)
+Sird::State Sird::Population::counts()
 {
   State count = {0, 0, 0, 0, 0};
   for (int r = 0, end = side() - 1; r != end; ++r) {
@@ -129,7 +129,7 @@ bool Sird::Population::recovery(double gamma)
   return result;
 }
 
-bool Sird::Population::dead(double delta)
+bool Sird::Population::death(double delta)
 {
   bool result = false;
 
@@ -185,13 +185,13 @@ void Sird::Population::massVaccination(
     }
   }
 }
-void Sird::Population::resusceptible(int infectivity,
-                                     double beta,
-                                     Sird::State& state)
+void Sird::Population::susceptibleAgain(int infectivity,
+                                        double sus_ag,
+                                        Sird::State& state)
 {
   int n_ = side();
-  int recovereds = static_cast<int>(beta * state.R);
-  assert(recovereds < n_ * 3 * n_);
+  int recovered = static_cast<int>(sus_ag * state.R);
+  assert(recovered < n_ * 3 * n_);
 
   std::random_device eng;
   std::vector<Position> recoveredCells;
@@ -203,7 +203,7 @@ void Sird::Population::resusceptible(int infectivity,
     }
   }
   shuffle(recoveredCells.begin(), recoveredCells.end(), eng);
-  for (int k = 0; k < recovereds; ++k) {
+  for (int k = 0; k < recovered; ++k) {
     person(recoveredCells[k].r, recoveredCells[k].c) =
         Sird::Person::Susceptible;
   }
@@ -235,11 +235,7 @@ void Sird::Population::evolve(
       }
 
       else if (person(r, c) == Sird::Person::Vaccinated) {
-        bool inf =
-            infection(beta * epsilon,
-                      infectivity,
-                      r,
-                      c);  
+        bool inf = infection(beta * epsilon, infectivity, r, c);
         if (inf == true) {
           person(r, c) = Sird::Person::Infected;
         } else if (inf == false) {
@@ -250,7 +246,7 @@ void Sird::Population::evolve(
         if (rec == true) {
           person(r, c) = Sird::Person::Recovered;
         } else if (rec == false) {
-          bool de = dead(delta);
+          bool de = death(delta);
           if (de == true) {
             person(r, c) = Sird::Person::Dead;
           } else if (de == false) {
@@ -259,8 +255,7 @@ void Sird::Population::evolve(
           }
         }
       } else if (person(r, c) == Sird::Person::Recovered) {
-        person(r, c) =
-            Person::Recovered;  
+        person(r, c) = Person::Recovered;
       } else if (person(r, c) == Sird::Person::Dead) {
         continue;
       }
