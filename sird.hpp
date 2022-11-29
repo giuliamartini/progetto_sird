@@ -51,7 +51,7 @@ class Population  // diventa board, che tra person population e natin non si
 
   Person& person(int r, int c);              // modificabile
   Person const& person(int r, int c) const;  // accesso
-  State counts(int infectivity);
+  State counts();
 
   void setInfected(Position p);
   void placePeople(int numberOfPeople, int infectivity);
@@ -64,11 +64,11 @@ class Population  // diventa board, che tra person population e natin non si
 
   bool infection(double beta, int infectivity, int r, int c);
   bool recovery(double gamma);
-  bool dead(double delta);
+  bool death(double delta);
   bool vaccination(double epsilon);
-  void massVaccination(int infectivity, int toBeVaccinated,double epsilon);
-  //void vaccinationOver(int infectivity, double gamma, Sird::State& state);
-  void resusceptible(int infectivity, double beta, State& state);
+  void massVaccination(int infectivity, int toBeVaccinated, double epsilon);
+
+  void susceptibleAgain(int infectivity, double susc_ag, State& state);
 
   void evolve(
       int infectivity, double beta, double gamma, double delta, double epsilon);
