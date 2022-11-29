@@ -5,7 +5,6 @@
 
 
 
-//test di placePeople - ha senso 
 TEST_CASE("Testing board, placePeople") {
 
 SUBCASE("Big board, max number of people") {
@@ -20,7 +19,6 @@ SUBCASE("Big board, max number of people") {
 }
 
 SUBCASE("Small board, max number of people") {
-
     Sird::Population board(20); 
     board.placePeople(196, 3); //numero massimo di persone 
     Sird::State count = board.counts(3); 
@@ -33,7 +31,7 @@ SUBCASE("Small board, max number of people") {
 }
 
 
-//test di setInfected FUNZIONA - HA SENSO
+
 TEST_CASE("Testing setInfected") {
 
 SUBCASE("One infected on the board") {
@@ -59,74 +57,20 @@ SUBCASE("Five infected on the board") {
 
 
 TEST_CASE("Testing the stability of the population") {
-
     Sird::Population board(20); 
-    board.placePeople(250, 3); //numero massimo di persone 
+    board.placePeople(250, 3); 
     board.setInfected({10, 10}); 
     board.setInfected({10, 9}); 
     board.setInfected({10, 8});
     board.setInfected({9, 10});
     board.setInfected({8, 10});
     Sird::State count = board.counts(3); 
-    int numberOfPeople = count.I + count.S;
-    int frame = 0;
-    board.Sird::Population::evolve(3, 0.8, 0.3, 0.1);
-    board.move(3);
-    ++frame;
+    int numberOfPeople = count.I + count.S; 
+        board.evolve(3, 0.8, 0.3, 0.1);
+        board.move(3);
+    count = board.counts(3);
     CHECK(count.S + count.I + count.R + count.D + count.V == numberOfPeople);
-    CHECK(count.S == 0);
-    CHECK(count.I == 0);
-    CHECK(count.R == 0);
-    CHECK(count.D == 0);
-    CHECK(count.V == 0);
 }
-
-
-
-//Non torna questo test
-/*TEST_CASE("Testing evolve") {
-    
-    SUBCASE("Testing the beginning of the vaccination"){
-    Sird::Population board(40);
-    board.Sird::Population::placePeople(1000, 3);
-    board.Sird::Population::setInfected({20, 20}); 
-    board.Sird::Population::setInfected({20, 19});
-    board.Sird::Population::setInfected({20, 18});
-    board.Sird::Population::setInfected({19, 20});
-    board.Sird::Population::setInfected({21, 20});
-    int frame = 0;
-    Sird::State count = board.counts(3);
-    board.evolve(3, 0.8, 0.3, 0.1, 0.7);
-    board.move(3);
-    board.massVaccination(3, 20, 0.7);
-    ++frame; 
-    if(frame < 20){
-        CHECK(count.V == 0);
-    } else if(frame >= 20) { //forse invece può succedere che ci siano 0 vaccinati dopo? 
-        CHECK(count.V == 0);
-    }
-    }
-    }
-*/
-
-//test senza move per vedere se con empty intorno non si infetta 
-//anche questo non ha senso 
-/*TEST_CASE("Testing without move") {
-    double beta = 0.8;
-    double gamma = 0.3;
-    double delta = 0.1;
-    double epsilon = 0.7;
-    int infectivity = 3;
-    constexpr int board_size = 40;
-    Sird::Population board(board_size);
-    board.Sird::Population::placePeople(1, 3);
-    int frame = 0;
-    Sird::State count = board.counts(3);
-    board.evolve(infectivity, beta, gamma, delta);
-    ++frame;
-    CHECK(count.S == 0);
-    CHECK(count.I == 1);
-}*/
 
 
 
