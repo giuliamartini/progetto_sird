@@ -19,16 +19,16 @@ void print(std::vector<Sir::State> const& states)
 }
 int main()
 {
-  std::cout << "Please enter the value of beta" << '\n';
+  std::cout << "Please enter the value of beta, make sure it is between 0.0 and 1.0" << '\n';
   double b;
   std::cin >> b;
-  std::cout << '\n' << "Please enter the value of gamma " << '\n';
+  std::cout << '\n' << "Please enter the value of gamma, make sure it is between 0.0 and 1.0" << '\n';
   double g;
   std::cin >> g;
-  std::cout << '\n' << "Please enter the initial value of susceptibles" << '\n';
+  std::cout << '\n' << "Please enter the initial number of susceptibles" << '\n';
   int numberOfS;
   std::cin >> numberOfS;
-  std::cout << "Please enter the initial value of infected" << '\n';
+  std::cout << "Please enter the initial number of infected" << '\n';
   int numberOfI;
   std::cin >> numberOfI; 
   std::cout << "Please enter the number of days of the simulation" << '\n';
