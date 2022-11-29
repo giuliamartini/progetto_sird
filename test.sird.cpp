@@ -68,11 +68,12 @@ TEST_CASE("Testing the stability of the population") {
     board.setInfected({9, 10});
     board.setInfected({8, 10});
     Sird::State count = board.counts(3); 
+    int numberOfPeople = count.I + count.S;
     int frame = 0;
     board.Sird::Population::evolve(3, 0.8, 0.3, 0.1);
     board.move(3);
     ++frame;
-    CHECK(count.S + count.I + count.R + count.D + count.V == 100);
+    CHECK(count.S + count.I + count.R + count.D + count.V == numberOfPeople);
     CHECK(count.S == 0);
     CHECK(count.I == 0);
     CHECK(count.R == 0);
