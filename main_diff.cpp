@@ -19,17 +19,33 @@ void print(std::vector<Sir::State> const& states)
 }
 int main()
 {
+  std::cout << "Please enter the value of beta" << '\n';
+  double b;
+  std::cin >> b;
+  std::cout << '\n' << "Please enter the value of gamma " << '\n';
+  double g;
+  std::cin >> g;
+  std::cout << '\n' << "Please enter the initial value of susceptibles" << '\n';
+  int numberOfS;
+  std::cin >> numberOfS;
+  std::cout << "Please enter the initial value of infected" << '\n';
+  int numberOfI;
+  std::cin >> numberOfI; 
+  std::cout << "Please enter the number of days of the simulation" << '\n';
+  int T;
+  std::cin >> T;
+  
   std::ofstream graph;
   graph << "graph_diff\n";
   graph.open("graph_diff.csv");
   graph << "Day,Susceptible,Infected,Recovered\n";
 
   // int infects = board.Sird::Population::count(infectivity).I;
-  int numberOfS = 300;
-  int numberOfI = 4;
-  double b = 0.8;
-  double g = 0.5;
-  int T = 200;
+  //int numberOfS = 300;
+  //int numberOfI = 4;
+  //double b = 0.8;
+  //double g = 0.5;
+  //int T = 200;
 
   Sir::State s0{};
   s0.S = numberOfS;
