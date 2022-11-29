@@ -53,35 +53,28 @@ int main()
 {
   std::cout << "Please enter the value of beta" << '\n';
   double beta;
-  //= 0.8;
   std::cin >> beta;
-  // std::cout << '\n' << "Please enter the value of gamma " << '\n';
-  double gamma = 0.3;
-  // std::cin >> gamma;
-  //  std::cout << '\n' << "Please enter the value of delta " << '\n';
-  double delta = 0.05;
-  //  std::cin >> delta;
-  // std::cout << "Please enter the value of infectivity" << '\n';
-  // std::cout << "Please enter epsilon" << '\n';
-  double epsilon = 0.7;
-  // std::cin >> epsilon;
-  //= 0.7;
-  int infectivity = 3;
-  // std::cin >> infectivity;
-  // std::cout << "Please enter the number of people, less than n*n*3" << '\n';
-  int numberOfPeople
-
-      = 4000;
-  // std::cin >> numberOfPeople;
-  // std::cout  << "Please enter the dimension of the board" << '\n';
-  constexpr int n_ = 50;
-  // std::cin >> n_;
-
+  std::cout << '\n' << "Please enter the value of gamma " << '\n';
+  double gamma;
+  std::cin >> gamma;
+  std::cout << '\n' << "Please enter the value of delta " << '\n';
+  double delta;
+  std::cin >> delta;
+  std::cout << '\n' << "Please enter the value of epsilon" << '\n';
+  double epsilon;
+  std::cin >> epsilon;
+  std::cout << '\n' << "Please enter the value of infectivity" << '\n';
+  int infectivity; 
+  std::cin >> infectivity;
+  std::cout  << '\n' << "Please enter the dimension of the board" << '\n';
+  int n_;
+  std::cin >> n_;
+  std::cout << '\n' << "Please enter the initial number of susceptibles, less than n*n*3" << '\n';
+  int numberOfPeople;
+  std::cin >> numberOfPeople;
+  
   //  numero di persone massimo che si possono vaccinare in un giorno
-  // std::cout << "Please enter the number numero massimo di vaccini al giorno"
-  //         << '\n';
   int toBeVaccinated = 20;
-  // std::cin >> toBeVaccinated;
 
   // constexpr int board_size = n_;
   Sird::Population board(n_);
