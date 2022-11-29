@@ -78,14 +78,14 @@ int main()
 
   // constexpr int board_size = n_;
   Sird::Population board(n_);
-  board.Sird::Population::placePeople(numberOfPeople, infectivity);
+  board.placePeople(numberOfPeople, infectivity);
 
-  board.Sird::Population::setInfected(
+  board.setInfected(
       {n_ / 2, n_ / 2 * 3});  // pazienti 0 al centro della board
-  board.Sird::Population::setInfected({n_ / 2, n_ / 2 * 3 - 1});
-  board.Sird::Population::setInfected({n_ / 2, n_ / 2 * 3 + 1});
-  board.Sird::Population::setInfected({n_ / 2 + 1, n_ / 2 * 3});
-  board.Sird::Population::setInfected({n_ / 2 - 1, n_ / 2 * 3});
+  board.setInfected({n_ / 2, n_ / 2 * 3 - 1});
+  board.setInfected({n_ / 2, n_ / 2 * 3 + 1});
+  board.setInfected({n_ / 2 + 1, n_ / 2 * 3});
+  board.setInfected({n_ / 2 - 1, n_ / 2 * 3});
   print_f(std::cout, board, infectivity);
   int frame = 0;
   Sird::State initialSituation = board.counts(infectivity);
@@ -99,7 +99,7 @@ int main()
   // int infects = board.Sird::Population::count(infectivity).I;
   Sird::State count{0, 0, 0, 0, 0};
 
-  while (board.Sird::Population::counts(infectivity).I != 0) {
+  while (board.counts(infectivity).I != 0) {
     count = board.counts(infectivity);
     assert(count.S + count.I + count.R + count.D + count.V == init);
     print_f(std::cout, board, infectivity);
