@@ -1,11 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
-
 #include <chrono>
-#include <exception>
-#include <fstream>
-#include <iomanip>
-#include <thread>
+#include <fstream> //file.csv
+#include <thread> //sleep, chrono
+#include "sird.hpp"
 
 #include "sird.hpp"
 
