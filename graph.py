@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 headers = ['Day', 'Susceptible', 'Infected', 'Recovered', 'Dead', 'Vaccinated']
-df = pd.read_csv('/home/giulia/plague3/Graph.csv')
+df = pd.read_csv('/home/giulia/progetto_sird-main/Graph.csv')
 print(df)
 Day = df['Day']
 S = df['Susceptible']
