@@ -138,7 +138,7 @@ int main()
   graph << "Day,Susceptible,Infected,Recovered,Dead,Vaccinated\n";
   Sird::State count{0, 0, 0, 0, 0};
 
-  while (board.counts().I != 0) {
+  while (board.counts().I != 0 && frame !=500) {
     count = board.counts();
     assert(count.S + count.I + count.R + count.D + count.V == init);
     print_f(std::cout, board, infectivity);
